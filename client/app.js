@@ -2,6 +2,7 @@
 class App extends HTMLElement {
     constructor() {
         super();
+        console.log('constructor');
     }
 
     connectedCallback() {
@@ -11,6 +12,13 @@ class App extends HTMLElement {
     disconnectedCallback() {
         console.log('Removed from DOM');
     }
+
+    static get observedAttributes() {
+        return [
+            'disabled',
+        ];
+    }
+
     attributeChangedCallback(attrName, oldVal, newVal) {
         console.log(`Attribute ${attrName} change from ${oldVal} to ${newVal}`);
     }
