@@ -1,5 +1,14 @@
 'use strict';
+
+import customElements from './CustomElements.js';
+
 class App extends HTMLElement {
+    static get observedAttributes() {
+        return [
+            'disabled',
+        ];
+    }
+
     constructor() {
         super();
         console.log('constructor');
@@ -9,14 +18,9 @@ class App extends HTMLElement {
         console.log('Added to DOM');
         this.innerHTML = '<p>Hello world!</p>';
     }
+
     disconnectedCallback() {
         console.log('Removed from DOM');
-    }
-
-    static get observedAttributes() {
-        return [
-            'disabled',
-        ];
     }
 
     attributeChangedCallback(attrName, oldVal, newVal) {
