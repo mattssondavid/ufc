@@ -2,9 +2,9 @@
   "name": "ufc",
   "version": "1.0.0",
   "description": "Utopia Fantasy Clone",
-  "main": "index.js",
+  "main": "src/server.mjs",
   "scripts": {
-    "start": "node --experimental-modules index.mjs",
+    "start": "node --experimental-modules src/server.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
