@@ -11,8 +11,7 @@ class RouterLocation extends HTMLElement
 
         this._bodyObserver = undefined;
 
-        console.log(document.body.parentNode);
-
+        // Bind event listeners callbacks
         this._onHistoryPopState = this._onHistoryPopState.bind(this);
 
         // Remove element from the accessable DOM tree
@@ -23,8 +22,6 @@ class RouterLocation extends HTMLElement
     connectedCallback() {
         this._startBodyObserver();
         this._addEventListeners();
-
-        window.history.pushState(null, null, '/');
     }
 
     disconnectedCallback() {
@@ -57,8 +54,10 @@ class RouterLocation extends HTMLElement
 
     _onHistoryPopState(evt) {
         const currentState = window.history.currentState;
+        const eventState = evt.state;
         console.log(currentState);
-        console.log(evt);
+        console.log(eventState);
+        console.log(window.location);
     }
 
     _addEventListeners() {
