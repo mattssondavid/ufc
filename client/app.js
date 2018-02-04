@@ -1,3 +1,4 @@
+import RouterLocation from './Routing/RouterLocation.js';
 
 class App extends HTMLElement {
     constructor() {
