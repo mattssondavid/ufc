@@ -1,6 +1,16 @@
 # ufc
 Utopia Fantasy Clone
 
+## Game Engine
+The game engine will be a Discrete Event Simulator run in functional style. We
+will use the State Monad to transfer the state between events and reduce them
+over the queue, using Reducers.
+
+links:
+  * https://en.wikipedia.org/wiki/Discrete_event_simulation
+  * https://en.wikipedia.org/wiki/MapReduce
+  * NO  real good link on state monad yet.
+
 ## Support older browsers
 To support older brwosers we need to include the polyfill for Web Components
 You can find the polyfill at:
