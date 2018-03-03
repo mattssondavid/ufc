@@ -8,11 +8,13 @@ import tap from 'tap';
 const mocha = tap.mocha;
 const expect = chai.expect;
 
-mocha.describe('Model', () => {
-    mocha.it('should not crash', () => {
+mocha.describe('Init model', () => {
+    mocha.it('does not crash', () => {
         init();
     });
-    mocha.it('should find money that got set for player with same name', () => {
+});
+mocha.describe('moneyForPlayer', () => {
+    mocha.it('finds money that got set for player with same name', () => {
         {
             let state1 = init();
             let state2 = setMoneyForPlayer(100, 'John Doe')(state1);
@@ -26,7 +28,7 @@ mocha.describe('Model', () => {
             expect(money).to.equal(200);
         }
     });
-    mocha.it('should find money for the correct player name', () => {
+    mocha.it('finds money for the correct player name', () => {
         {
             let state1 = init();
             let state2 = setMoneyForPlayer(200, 'John Doe')(state1);
@@ -35,16 +37,14 @@ mocha.describe('Model', () => {
             expect(money).to.equal(200);
         }
     });
-    mocha.it('should use the last value', () => {
-
+    mocha.it('finds the last value', () => {
         let state1 = init();
         let state2 = setMoneyForPlayer(200, 'John Doe')(state1);
         let state3 = setMoneyForPlayer(300, 'John Doe')(state2);
         let money = getMoneyForPlayer('John Doe')(state3);
         expect(money).to.equal(300);
     });
-    mocha.it('should not modify old state', () => {
-
+    mocha.it('does not modify old state', () => {
         let state1 = init();
         let state2 = setMoneyForPlayer(200, 'John Doe')(state1);
         setMoneyForPlayer(300, 'John Doe')(state2);
