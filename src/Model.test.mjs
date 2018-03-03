@@ -7,8 +7,8 @@ const init = model.init;
 const setMoneyForPlayer = model.setMoneyForPlayer;
 const getMoneyForPlayer = model.getMoneyForPlayer;
 
-mocha.describe('Model', function () {
-    mocha.it('should not crash', function () {
+mocha.describe('Model', () => {
+    mocha.it('should not crash', () => {
         init();
     });
     mocha.it('should find money that got set for player with same name', () => {
@@ -34,7 +34,7 @@ mocha.describe('Model', function () {
             expect(money).to.equal(200);
         }
     });
-    mocha.it('should use the last value', function () {
+    mocha.it('should use the last value', () => {
 
         let state1 = init();
         let state2 = setMoneyForPlayer(200, 'John Doe')(state1);
@@ -42,7 +42,7 @@ mocha.describe('Model', function () {
         let money = getMoneyForPlayer('John Doe')(state3);
         expect(money).to.equal(300);
     });
-    mocha.it('should not modify old state', function () {
+    mocha.it('should not modify old state', () => {
 
         let state1 = init();
         let state2 = setMoneyForPlayer(200, 'John Doe')(state1);
