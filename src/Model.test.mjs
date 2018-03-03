@@ -1,11 +1,12 @@
-import model from './Model';
+import {
+    init,
+    setMoneyForPlayer,
+    getMoneyForPlayer
+} from './Model';
 import chai from 'chai';
 import tap from 'tap';
 const mocha = tap.mocha;
 const expect = chai.expect;
-const init = model.init;
-const setMoneyForPlayer = model.setMoneyForPlayer;
-const getMoneyForPlayer = model.getMoneyForPlayer;
 
 mocha.describe('Model', () => {
     mocha.it('should not crash', () => {
