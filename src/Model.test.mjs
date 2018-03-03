@@ -1,9 +1,11 @@
-const model = require('./Model');
+import model from "./Model";
+import chai from "chai";
+import tap from "tap";
+const mocha = tap.mocha;
+const expect = chai.expect;
 const init = model.init;
 const setMoneyForPlayer = model.setMoneyForPlayer;
 const getMoneyForPlayer = model.getMoneyForPlayer;
-const expect = require('chai').expect;
-const mocha = require('tap').mocha;
 
 mocha.describe('Model', function () {
     mocha.it('should not crash', function () {
