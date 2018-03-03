@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     init: () => ({}),
     setMoneyForPlayer: (amount, player) => state => {
         let newState = {
