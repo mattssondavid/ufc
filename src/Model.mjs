@@ -3,11 +3,12 @@ const setSubState = (name, setter) => state => ({
     [name]: setter(state[name])
 });
 const getSubState = (name, getter) => state => getter(state[name]);
+const defaultTo = def => a => a || def;
+
 export const init = () => ({
     goldmines: {},
     money: {}
 });
-const defaultTo = def => a => a || def;
 export const setMoneyForPlayer = (amount, player) => {
     return setSubState('money', setSubState(player, () => amount));
 };
