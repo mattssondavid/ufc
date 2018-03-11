@@ -1,8 +1,8 @@
-const modifySubState = name =>  setter => state => ({
+const modifySubState = name => setter => state => ({
     ...state,
     [name]: setter(state[name])
 });
-const getSubState = name =>  getter => state => getter(state[name]);
+const getSubState = name => getter => state => getter(state[name]);
 const modifyMoneyState = modifySubState('money');
 const getMoneyState = getSubState('money');
 const modifyGoldminesState = modifySubState('goldmines');
