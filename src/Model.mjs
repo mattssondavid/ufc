@@ -7,17 +7,16 @@ export const init = () => ({
     goldmines: {},
     money: {}
 });
-const setAmount = (amount, player) => state => ({...state, [player]: amount});
-const getAmount = player => state => state[player] || 0;
+const defaultTo = def => a => a || def;
 export const setMoneyForPlayer = (amount, player) => {
-    return setSubState('money', setAmount(amount, player));
+    return setSubState('money', setSubState(player, () => amount));
 };
 export const getMoneyForPlayer = player => {
-    return getSubState('money', getAmount(player));
+    return getSubState('money', getSubState(player,  defaultTo(0)));
 };
 export const getNumberOfGoldminesForPlayer = player => {
-    return getSubState('goldmines', getAmount(player));
+    return getSubState('goldmines', getSubState(player, defaultTo(0)));
 };
 export const setNumberOfGoldminesForPlayer = (amount, player) => {
-    return setSubState('goldmines', setAmount(amount, player));
+    return setSubState('goldmines', setSubState(player, () => amount));
 };
