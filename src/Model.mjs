@@ -7,8 +7,8 @@ const modifyMoneyState = modifySubState('money');
 const getMoneyState = getSubState('money');
 const modifyGoldminesState = modifySubState('goldmines');
 const getGoldminesState = getSubState('goldmines');
-const defaultTo = def => a => a || def;
-const _const = c => v => c;
+const defaultTo = _default => a => a || _default;
+const _const = constant => _ => constant;
 
 export const init = () => ({});
 export const setMoneyForPlayer = (amount, player) => {
