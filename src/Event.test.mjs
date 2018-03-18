@@ -3,7 +3,8 @@ import {
     eventMap,
     getState,
     putState,
-    event
+    event,
+    eventQueue
 } from './Event';
 
 import chai from 'chai';
@@ -51,5 +52,14 @@ mocha.describe('Event', () => {
         let e = event(time, action);
         expect(e.time).to.equal(time);
         expect(e.action).to.equal(action);
+    });
+});
+
+mocha.describe('eventQueue', () => {
+    mocha.it('creates a min heap with events', function () {
+        let event1 = event(10, () => null);
+        let event2 = event(12, () => null);
+        let q = eventQueue(event1).merge(eventQueue(event2));
+        expect(q.peek()).to.equal(event1);
     });
 });
