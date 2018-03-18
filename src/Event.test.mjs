@@ -63,3 +63,10 @@ mocha.describe('eventQueue', () => {
         expect(q.peek()).to.equal(event1);
     });
 });
+/*
+ToDo: The rest of the events (bind for event)
+ToDo: Be able to flatten a eventResult (bind/flat-map)
+
+ToDo: Implement a while that pop:s events from the eventQueue. Similar code that
+handles the event queue that state-handling has to be implemented
+*/
