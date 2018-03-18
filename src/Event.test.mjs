@@ -1,4 +1,9 @@
-import { eventResult, eventMap } from './Event';
+import {
+    eventResult,
+    eventMap,
+    getState,
+    putState,
+} from './Event';
 
 import chai from 'chai';
 import tap from 'tap';
@@ -19,5 +24,21 @@ mocha.describe("eventResult", () => {
         expect(mappedEr.value).to.equal(value.toLowerCase());
         expect(mappedEr.state).to.equal(state);
         expect(mappedEr.queue).to.equal(queue);
+    });
+    mocha.describe('getState', () => {
+        mocha.it('sets value to the current state', () => {
+            let stateEr = getState(er);
+            expect(stateEr.value).to.equal(state);
+            expect(stateEr.state).to.equal(state);
+            expect(stateEr.queue).to.equal(queue);
+        });
+    });
+    mocha.describe('putState', () => {
+        mocha.it('puts value to the current state', () => {
+            let stateEr = putState(er);
+            expect(stateEr.value).to.equal(value);
+            expect(stateEr.queue).to.equal(queue);
+            expect(stateEr.state).to.equal(value);
+        });
     });
 });

@@ -9,3 +9,6 @@ export let eventMap = fun => er => eventResult(
     er.queue,
     fun(er.value)
 );
+
+export let getState = er => eventResult(er.state, er.queue, er.state);
+export let putState = er => eventResult(er.value, er.queue, er.value);
