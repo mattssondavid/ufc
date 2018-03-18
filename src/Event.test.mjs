@@ -3,6 +3,7 @@ import {
     eventMap,
     getState,
     putState,
+    event
 } from './Event';
 
 import chai from 'chai';
@@ -40,5 +41,15 @@ mocha.describe("eventResult", () => {
             expect(stateEr.queue).to.equal(queue);
             expect(stateEr.state).to.equal(value);
         });
+    });
+});
+
+mocha.describe('Event', () => {
+    mocha.it('have a time and action', () => {
+        let time = 'TIME';
+        let action = 'ACTION';
+        let e = event(time, action);
+        expect(e.time).to.equal(time);
+        expect(e.action).to.equal(action);
     });
 });
