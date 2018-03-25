@@ -12,8 +12,20 @@ export let eventMap = fun => er => eventResult(
     fun(er.value)
 );
 
-export let getState = er => eventResult(er.state, er.queue, er.state);
-export let putState = er => eventResult(er.value, er.queue, er.value);
+export let getState =
+    state => eventResult(
+        state,
+        emptyEventQueue,
+        state
+    );
+
+export let putState =
+    value => _ => eventResult(
+        value,
+        emptyEventQueue,
+        undefined
+    );
+
 export let event = (time, action) => ({time: time, action: action});
 
 let compareEvents = (a, b) => Math.sign(a.time - b.time);

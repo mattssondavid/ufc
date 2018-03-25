@@ -4,7 +4,7 @@ import {
     getState,
     putState,
     event,
-    eventQueue
+    eventQueue, emptyEventQueue
 } from './Event';
 
 import chai from 'chai';
@@ -29,18 +29,18 @@ mocha.describe("eventResult", () => {
     });
     mocha.describe('getState', () => {
         mocha.it('sets value to the current state', () => {
-            let stateEr = getState(er);
+            let stateEr = getState(er.state);
             expect(stateEr.value).to.equal(state);
             expect(stateEr.state).to.equal(state);
-            expect(stateEr.queue).to.equal(queue);
+            expect(stateEr.queue).to.equal(emptyEventQueue);
         });
     });
     mocha.describe('putState', () => {
         mocha.it('puts value to the current state', () => {
-            let stateEr = putState(er);
-            expect(stateEr.value).to.equal(value);
-            expect(stateEr.queue).to.equal(queue);
+            let stateEr = putState(er.value)(er.state);
+            expect(stateEr.value).to.equal(undefined);
             expect(stateEr.state).to.equal(value);
+            expect(stateEr.queue).to.equal(emptyEventQueue);
         });
     });
 });
