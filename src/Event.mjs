@@ -6,11 +6,22 @@ export let eventResult = (state, queue, value) => ({
     value: value
 });
 
-export let eventMap = fun => er => eventResult(
-    er.state,
-    er.queue,
-    fun(er.value)
-);
+export let pureAction =
+    value => state => eventResult(
+      state,
+      emptyEventQueue,
+      value
+    );
+
+export let eventMap =
+    fun => action => state => {
+        let er = action(state);
+        return eventResult(
+            er.state,
+            er.queue,
+            fun(er.value)
+        );
+    };
 
 // action is a function
 // state -> eventResult

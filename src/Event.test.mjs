@@ -4,7 +4,7 @@ import {
     getState,
     putState,
     event,
-    eventQueue, emptyEventQueue
+    eventQueue, emptyEventQueue, pureAction
 } from './Event';
 
 import chai from 'chai';
@@ -22,10 +22,12 @@ mocha.describe("eventResult", () => {
         expect(er.queue).to.equal(queue);
     });
     mocha.it('maps over the value', () => {
-        let mappedEr = eventMap(s => s.toLowerCase())(er);
-        expect(mappedEr.value).to.equal(value.toLowerCase());
+        let toUpperAction = eventMap(s => s.toUpperCase());
+        let helloWorld = pureAction("hello world!");
+        let mappedEr = toUpperAction(helloWorld)(state);
+        expect(mappedEr.value).to.equal("HELLO WORLD!");
         expect(mappedEr.state).to.equal(state);
-        expect(mappedEr.queue).to.equal(queue);
+        expect(mappedEr.queue).to.equal(emptyEventQueue);
     });
     mocha.describe('getState', () => {
         mocha.it('sets value to the current state', () => {
