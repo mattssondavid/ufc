@@ -1,10 +1,11 @@
 import Persistence from 'persistence-js';
 let Heap = Persistence.Heap;
-export let actionResult = (state, queue, value) => ({
-    state: state,
-    queue: queue,
-    value: value
-});
+export let actionResult =
+    (state, queue, value) => ({
+        state: state,
+        queue: queue,
+        value: value
+    });
 
 export let pureAction =
     value => state => actionResult(
