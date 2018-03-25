@@ -54,7 +54,9 @@ export let event =
 
 let compareEvents =
     (a, b) => Math.sign(a.time - b.time);
+
 export let eventQueue = e =>
     new Heap([e], false, compareEvents);
+
 export let emptyEventQueue =
     new Heap([], false, compareEvents);
