@@ -24,6 +24,13 @@ export let actionMap =
         );
     };
 
+export let addEvent =
+    event => state => actionResult(
+        state,
+        eventQueue(event),
+        undefined
+    );
+
 // action is a function
 // state -> actionResult
 // actionResult :: (state, queue, value)

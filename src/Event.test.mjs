@@ -4,7 +4,10 @@ import {
     getState,
     putState,
     event,
-    eventQueue, emptyEventQueue, pureAction
+    eventQueue,
+    emptyEventQueue,
+    pureAction,
+    addEvent
 } from './Event';
 
 import chai from 'chai';
@@ -45,6 +48,16 @@ mocha.describe("actionResult", () => {
             expect(stateEr.queue).to.equal(emptyEventQueue);
         });
     });
+    mocha.describe('addEvent', () => {
+        mocha.it('writes a eventQueue with the event to the result', () => {
+            let e = event(10, pureAction("hello World"));
+            let er = addEvent(e)(state);
+            expect(er.state).to.equal(state);
+            expect(er.value).to.equal(undefined);
+            expect(er.queue.size).to.equal(1);
+            expect(er.queue.peek()).to.equal(e);
+        })
+    })
 });
 
 mocha.describe('Event', () => {
