@@ -1,6 +1,6 @@
 import {
-    eventResult,
-    eventMap,
+    actionResult,
+    actionMap,
     getState,
     putState,
     event,
@@ -11,18 +11,18 @@ import chai from 'chai';
 import tap from 'tap';
 const mocha = tap.mocha;
 const expect = chai.expect;
-mocha.describe("eventResult", () => {
+mocha.describe("actionResult", () => {
     let value = 'VALUE';
     let state = 'STATE';
     let queue = 'QUEUE';
-    let er = eventResult(state, queue, value);
+    let er = actionResult(state, queue, value);
     mocha.it('have a state, a queue and a value', () => {
         expect(er.value).to.equal(value);
         expect(er.state).to.equal(state);
         expect(er.queue).to.equal(queue);
     });
     mocha.it('maps over the value', () => {
-        let toUpperAction = eventMap(s => s.toUpperCase());
+        let toUpperAction = actionMap(s => s.toUpperCase());
         let helloWorld = pureAction("hello world!");
         let mappedEr = toUpperAction(helloWorld)(state);
         expect(mappedEr.value).to.equal("HELLO WORLD!");
@@ -66,8 +66,8 @@ mocha.describe('eventQueue', () => {
     });
 });
 /*
-ToDo: The rest of the events (bind for event)
-ToDo: Be able to flatten a eventResult (bind/flat-map)
+ToDo: The rest of the events (bind for action)
+ToDo: Be able to flatten a actionResult (bind/flat-map)
 
 ToDo: Implement a while that pop:s events from the eventQueue. Similar code that
 handles the event queue that state-handling has to be implemented

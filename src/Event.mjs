@@ -1,22 +1,22 @@
 import Persistence from 'persistence-js';
 let Heap = Persistence.Heap;
-export let eventResult = (state, queue, value) => ({
+export let actionResult = (state, queue, value) => ({
     state: state,
     queue: queue,
     value: value
 });
 
 export let pureAction =
-    value => state => eventResult(
+    value => state => actionResult(
       state,
       emptyEventQueue,
       value
     );
 
-export let eventMap =
+export let actionMap =
     fun => action => state => {
         let er = action(state);
-        return eventResult(
+        return actionResult(
             er.state,
             er.queue,
             fun(er.value)
@@ -24,18 +24,18 @@ export let eventMap =
     };
 
 // action is a function
-// state -> eventResult
-// eventResult :: (state, queue, value)
+// state -> actionResult
+// actionResult :: (state, queue, value)
 
 export let getState =
-    state => eventResult(
+    state => actionResult(
         state,
         emptyEventQueue,
         state
     );
 
 export let putState =
-    value => _ => eventResult(
+    value => _ => actionResult(
         value,
         emptyEventQueue,
         undefined
