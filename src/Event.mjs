@@ -1,5 +1,10 @@
 import Persistence from 'persistence-js';
 let Heap = Persistence.Heap;
+
+// action is a function
+// state -> actionResult
+// actionResult :: (state, queue, value)
+
 export let actionResult =
     (state, queue, value) => ({
         state: state,
@@ -30,10 +35,6 @@ export let addEvent =
         eventQueue(event),
         undefined
     );
-
-// action is a function
-// state -> actionResult
-// actionResult :: (state, queue, value)
 
 export let getState =
     state => actionResult(
