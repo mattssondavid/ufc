@@ -7,7 +7,8 @@ import {
     eventQueue,
     emptyEventQueue,
     pureAction,
-    addEvent
+    addEvent,
+    flatMap
 } from './Event';
 
 import chai from 'chai';
@@ -31,6 +32,36 @@ mocha.describe("actionResult", () => {
         expect(mappedEr.value).to.equal("HELLO WORLD!");
         expect(mappedEr.state).to.equal(state);
         expect(mappedEr.queue).to.equal(emptyEventQueue);
+    });
+    mocha.describe('flatMap', () =>{
+        mocha.it('gives the value to the next action constructor', () => {
+            let action = flatMap(
+                pureAction('Hello World'),
+                s => pureAction(s + '!')
+            );
+            let ar = action(state);
+            expect(ar.value).to.equal('Hello World!');
+        });
+        mocha.it('passes the state around correctly', () => {
+            let action = flatMap(
+                putState('Hello World'),
+                _ => flatMap(
+                    getState,
+                    s => putState(s + '!')
+                )
+            );
+            let ar = action('Goodbye World');
+            expect(ar.state).to.equal('Hello World!');
+        });
+        mocha.it('merges events from actions', () => {
+            let eventAction = pureAction('Hello World!');
+            let action = flatMap(
+               addEvent(event(20, eventAction)),
+               _ => addEvent(event(30, eventAction))
+            );
+            let ar = action(state);
+            expect(ar.queue.size).to.equal(2);
+        });
     });
     mocha.describe('getState', () => {
         mocha.it('sets value to the current state', () => {

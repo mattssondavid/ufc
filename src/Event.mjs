@@ -29,6 +29,18 @@ export let actionMap =
         );
     };
 
+export let flatMap =
+    (action, actionConstructor) => state => {
+        let ar = action(state);
+        let newAction = actionConstructor(ar.value);
+        let ar2 = newAction(ar.state);
+        return actionResult(
+            ar2.state,
+            ar.queue.merge(ar2.queue),
+            ar2.value
+        );
+    };
+
 export let addEvent =
     event => state => actionResult(
         state,
