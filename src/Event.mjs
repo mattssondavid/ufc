@@ -12,6 +12,10 @@ export let eventMap = fun => er => eventResult(
     fun(er.value)
 );
 
+// action is a function
+// state -> eventResult
+// eventResult :: (state, queue, value)
+
 export let getState =
     state => eventResult(
         state,
