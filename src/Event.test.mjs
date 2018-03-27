@@ -102,6 +102,11 @@ mocha.describe('Event', () => {
 });
 
 mocha.describe('eventQueue', () => {
+    mocha.it('can merge empty queues', () => {
+        expect(
+            emptyEventQueue.merge(emptyEventQueue).size
+        ).to.equal(0)
+    });
     mocha.it('creates a min heap with events', function () {
         let event1 = event(10, () => null);
         let event2 = event(12, () => null);
