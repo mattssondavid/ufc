@@ -56,8 +56,15 @@ export let getState =
     );
 
 export let putState =
-    value => _ => actionResult(
+    value => () => actionResult(
         value,
+        emptyEventQueue,
+        undefined
+    );
+
+export let modifyState =
+    f => state => actionResult(
+        f(state),
         emptyEventQueue,
         undefined
     );

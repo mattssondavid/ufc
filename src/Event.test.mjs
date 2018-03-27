@@ -3,6 +3,7 @@ import {
     actionMap,
     getState,
     putState,
+    modifyState,
     event,
     eventQueue,
     emptyEventQueue,
@@ -45,7 +46,7 @@ mocha.describe("actionResult", () => {
         mocha.it('passes the state around correctly', () => {
             let action = flatMap(
                 putState('Hello World'),
-                _ => flatMap(
+                () => flatMap(
                     getState,
                     s => putState(s + '!')
                 )
@@ -56,8 +57,8 @@ mocha.describe("actionResult", () => {
         mocha.it('merges events from actions', () => {
             let eventAction = pureAction('Hello World!');
             let action = flatMap(
-               addEvent(event(20, eventAction)),
-               _ => addEvent(event(30, eventAction))
+                addEvent(event(20, eventAction)),
+                () => addEvent(event(30, eventAction))
             );
             let ar = action(state);
             expect(ar.queue.size).to.equal(2);
@@ -76,6 +77,14 @@ mocha.describe("actionResult", () => {
             let stateEr = putState(er.value)(er.state);
             expect(stateEr.value).to.equal(undefined);
             expect(stateEr.state).to.equal(value);
+            expect(stateEr.queue).to.equal(emptyEventQueue);
+        });
+    });
+    mocha.describe('modifyState', () => {
+        mocha.it('takes a function that modifies the state', () => {
+            let stateEr = modifyState(s => s + 1)(10);
+            expect(stateEr.value).to.equal(undefined);
+            expect(stateEr.state).to.equal(11);
             expect(stateEr.queue).to.equal(emptyEventQueue);
         });
     });
