@@ -4,6 +4,7 @@ import {
     getState,
     putState,
     modifyState,
+    doAction,
     event,
     eventQueue,
     emptyEventQueue,
@@ -96,6 +97,17 @@ mocha.describe("actionResult", () => {
             expect(er.value).to.equal(undefined);
             expect(er.queue.size).to.equal(1);
             expect(er.queue.peek()).to.equal(e);
+        })
+    })
+
+    mocha.describe('doAction', () => {
+        mocha.it('chains actions into one', () => {
+            let action = doAction(function* () {
+                let state = yield getState;
+                return putState(state + 1);
+            });
+            let ar = action(11);
+            expect(ar.state).to.equal(12);
         })
     })
 });

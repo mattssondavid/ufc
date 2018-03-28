@@ -69,6 +69,17 @@ export let modifyState =
         undefined
     );
 
+export let doAction = gen => doActionHelper(gen())();
+let doActionHelper = iterator => value => {
+    let {value: action, done} = iterator.next(value);
+    if (done) {
+        if (action) return action;
+        else return pureAction(value);
+    } else {
+        return flatMap(action, doActionHelper(iterator));
+    }
+};
+
 export let event =
     (time, action) => ({time: time, action: action});
 
