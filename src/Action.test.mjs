@@ -1,10 +1,12 @@
+import chai from 'chai';
+import tap from 'tap';
+const mocha = tap.mocha;
+const expect = chai.expect;
+
 import {
     event,
     emptyEventQueue
 } from './Event';
-
-import chai from 'chai';
-import tap from 'tap';
 import {
     actionMap,
     actionResult,
@@ -16,8 +18,8 @@ import {
     pureAction,
     putState
 } from "./Action";
-const mocha = tap.mocha;
-const expect = chai.expect;
+
+
 mocha.describe("actionResult", () => {
     let value = 'VALUE';
     let state = 'STATE';
@@ -99,7 +101,7 @@ mocha.describe("actionResult", () => {
             expect(er.queue.size).to.equal(1);
             expect(er.queue.peek()).to.equal(e);
         })
-    })
+    });
 
     mocha.describe('doAction', () => {
         mocha.it('chains actions into one', () => {
