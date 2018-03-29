@@ -4,11 +4,7 @@ import {
 } from "./Event";
 
 export const result =
-    (state, queue, value) => ({
-        state: state,
-        queue: queue,
-        value: value
-    });
+    (state, queue, value) => ({state, queue, value});
 
 export const pure =
     value => state => result(
