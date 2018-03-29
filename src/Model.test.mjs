@@ -2,7 +2,7 @@ import {
     init,
     setMoneyForPlayer,
     getMoneyForPlayer,
-    getNumberOfGoldminesForPlayer,
+    getGoldminesForPlayer,
     setNumberOfGoldminesForPlayer
 } from './Model';
 import chai from 'chai';
@@ -36,7 +36,7 @@ mocha.describe('Model', () => {
         let state3 = setMoneyForPlayer(2, 'Joanne Doe')(state2);
         setNumberOfGoldminesForPlayer(3, 'John Doe')(state3);
         let money = getMoneyForPlayer('Joanne Doe')(state3);
-        let mines = getNumberOfGoldminesForPlayer('John Doe')(state3);
+        let mines = getGoldminesForPlayer('John Doe')(state3);
         expect(money).to.equal(2);
         expect(mines).to.equal(3);
     });*/
@@ -84,13 +84,13 @@ mocha.describe('moneyForPlayer', () => {
 mocha.describe('goldminesForPlayer', () => {
     mocha.it('finds the number of goldmines for a player', () => {
         let state = init();
-        let numberOfGoldmines = getNumberOfGoldminesForPlayer('John Doe')(state);
+        let numberOfGoldmines = getGoldminesForPlayer('John Doe')(state);
         expect(numberOfGoldmines).to.equal(0);
     });
     mocha.it('finds the number for of goldmines for player after it has been set', () => {
         let state1 = init();
         let state2 = setNumberOfGoldminesForPlayer(1, 'John Doe')(state1);
-        let numberOfMines = getNumberOfGoldminesForPlayer('John Doe')(state2);
+        let numberOfMines = getGoldminesForPlayer('John Doe')(state2);
         expect(numberOfMines).to.equal(1);
     });
 });

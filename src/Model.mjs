@@ -26,7 +26,7 @@ export const getMoneyForPlayer =
     player => getSubState(player)(
         s => getMoneyState(defaultTo(0))(s || {})
     );
-export const getNumberOfGoldminesForPlayer =
+export const getGoldminesForPlayer =
     player => getSubState(player)(
         s => getGoldminesState(defaultTo(0))(s || {})
     );
