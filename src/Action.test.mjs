@@ -70,7 +70,7 @@ mocha.describe("result", () => {
     });
     mocha.describe('getState', () => {
         mocha.it('sets value to the current state', () => {
-            let stateEr = getState(er.state);
+            let stateEr = getState(state);
             expect(stateEr.value).to.equal(state);
             expect(stateEr.state).to.equal(state);
             expect(stateEr.queue).to.equal(emptyEventQueue);
@@ -78,7 +78,7 @@ mocha.describe("result", () => {
     });
     mocha.describe('putState', () => {
         mocha.it('puts value to the current state', () => {
-            let stateEr = putState(er.value)(er.state);
+            let stateEr = putState(value)(state);
             expect(stateEr.value).to.equal(undefined);
             expect(stateEr.state).to.equal(value);
             expect(stateEr.queue).to.equal(emptyEventQueue);
