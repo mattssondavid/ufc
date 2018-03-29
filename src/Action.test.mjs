@@ -23,13 +23,6 @@ import {
 mocha.describe("result", () => {
     let value = 'VALUE';
     let state = 'STATE';
-    let queue = 'QUEUE';
-    let er = result(state, queue, value);
-    mocha.it('have a state, a queue and a value', () => {
-        expect(er.value).to.equal(value);
-        expect(er.state).to.equal(state);
-        expect(er.queue).to.equal(queue);
-    });
     mocha.it('maps over the value', () => {
         let toUpperAction = map(s => s.toUpperCase());
         let helloWorld = pure("hello world!");
