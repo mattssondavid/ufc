@@ -8,31 +8,31 @@ import {
     emptyEventQueue
 } from './Event';
 import {
-    actionMap,
-    actionResult,
+    map,
+    result,
     addEvent,
     doAction,
     flatMap,
     getState,
     modifyState,
-    pureAction,
+    pure,
     putState
 } from "./Action";
 
 
-mocha.describe("actionResult", () => {
+mocha.describe("result", () => {
     let value = 'VALUE';
     let state = 'STATE';
     let queue = 'QUEUE';
-    let er = actionResult(state, queue, value);
+    let er = result(state, queue, value);
     mocha.it('have a state, a queue and a value', () => {
         expect(er.value).to.equal(value);
         expect(er.state).to.equal(state);
         expect(er.queue).to.equal(queue);
     });
     mocha.it('maps over the value', () => {
-        let toUpperAction = actionMap(s => s.toUpperCase());
-        let helloWorld = pureAction("hello world!");
+        let toUpperAction = map(s => s.toUpperCase());
+        let helloWorld = pure("hello world!");
         let mappedEr = toUpperAction(helloWorld)(state);
         expect(mappedEr.value).to.equal("HELLO WORLD!");
         expect(mappedEr.state).to.equal(state);
@@ -41,8 +41,8 @@ mocha.describe("actionResult", () => {
     mocha.describe('flatMap', () =>{
         mocha.it('gives the value to the next action constructor', () => {
             let action = flatMap(
-                pureAction('Hello World'),
-                s => pureAction(s + '!')
+                pure('Hello World'),
+                s => pure(s + '!')
             );
             let ar = action(state);
             expect(ar.value).to.equal('Hello World!');
@@ -59,7 +59,7 @@ mocha.describe("actionResult", () => {
             expect(ar.state).to.equal('Hello World!');
         });
         mocha.it('merges events from actions', () => {
-            let eventAction = pureAction('Hello World!');
+            let eventAction = pure('Hello World!');
             let action = flatMap(
                 addEvent(event(20, eventAction)),
                 () => addEvent(event(30, eventAction))
@@ -94,7 +94,7 @@ mocha.describe("actionResult", () => {
     });
     mocha.describe('addEvent', () => {
         mocha.it('writes a eventQueue with the event to the result', () => {
-            let e = event(10, pureAction("hello World"));
+            let e = event(10, pure("hello World"));
             let er = addEvent(e)(state);
             expect(er.state).to.equal(state);
             expect(er.value).to.equal(undefined);

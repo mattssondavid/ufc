@@ -3,8 +3,8 @@ import Persistence from 'persistence-js';
 let Heap = Persistence.Heap;
 
 // action is a function
-// state -> actionResult
-// actionResult :: (state, queue, value)
+// state -> result
+// result :: (state, queue, value)
 
 
 
