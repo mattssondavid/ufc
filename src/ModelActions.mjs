@@ -6,6 +6,12 @@ import {
 } from './Action';
 import * as Model from './Model';
 
+export const addGoldminesForPlayer =
+    (amount, player) => modifyState(state => {
+       const goldmines = Model.getGoldminesForPlayer(player)(state);
+       return Model.setGoldminesForPlayer(amount + goldmines, player)(state);
+    });
+
 export const getGoldminesForPlayer =
     player => doAction(function* (){
         const state = yield getState;
@@ -26,8 +32,9 @@ export const setMoneyForPlayer =
 
 export const giveMoneyToPlayer =
     (amount, player) => doAction(function* () {
-       const money = yield getMoneyForPlayer(player)
-       return setMoneyForPlayer(money + amount, player)
+        const money = yield getMoneyForPlayer(player);
+        const newMoney = money + amount;
+        return setMoneyForPlayer(newMoney, player)
     });
 
 export const giveMoneyToPlayerPerGoldmine =

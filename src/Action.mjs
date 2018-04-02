@@ -1,4 +1,5 @@
 import {
+    event,
     emptyEventQueue,
     eventQueue
 } from "./Event";
@@ -40,6 +41,16 @@ export const addEvent =
         undefined
     );
 
+export const repeatAction =
+    (start, interval, action) => doAction(function*() {
+        const nextStart = start + interval;
+        yield addEvent(event(start, action));
+        return addEvent(event(
+            nextStart,
+            repeatAction(nextStart, interval, action)
+        ));
+    });
+
 export const getState =
     state => result(
         state,
@@ -61,7 +72,8 @@ export const modifyState =
         undefined
     );
 
-export const doAction = gen => doHelper(gen())();
+export const doAction =
+    gen => state => doHelper(gen())()(state);
 
 const doHelper = iterator => value => {
     const {value: action, done} = iterator.next(value);

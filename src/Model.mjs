@@ -17,7 +17,7 @@ export const setMoneyForPlayer =
     (amount, player) => modifySubState(player)(
         s => modifyMoneyState(_const(amount))(s || {})
     );
-export const setNumberOfGoldminesForPlayer =
+export const setGoldminesForPlayer =
     (amount, player) => modifySubState(player)(
         s => modifyGoldminesState(_const(amount))(s || {})
     );
