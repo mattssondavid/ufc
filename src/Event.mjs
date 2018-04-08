@@ -2,29 +2,6 @@ import Persistence from 'persistence-js';
 
 let Heap = Persistence.Heap;
 
-// action is a function
-// state -> result
-// result :: (state, queue, value)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 export let event =
     (time, action) => ({time: time, action: action});
 

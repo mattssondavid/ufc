@@ -4,6 +4,10 @@ import {
     eventQueue
 } from "./Event";
 
+// action is a function
+// state -> result
+// result :: (state, queue, value)
+
 export const result =
     (state, queue, value) => ({state, queue, value});
 
