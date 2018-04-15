@@ -5,7 +5,7 @@
   "main": "src/server.mjs",
   "scripts": {
     "start": "node --experimental-modules src/server.mjs",
-    "test": "node --experimental-modules src/test.mjs | tap -Rspec -"
+    "test": "node --experimental-modules --no-warnings src/test.mjs | tap -Rspec -"
   },
   "repository": {
     "type": "git",
